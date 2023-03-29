@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import Context from './Context';
 
 function Provider({ children }) {
