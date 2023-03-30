@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { requestLogin } from '../services/requests';
 
 function Login() {
   const [formInput, setFormInput] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(true);
+  const [failLogin, setFailLogin] = useState(false);
+  const history = useHistory();
 
   const inputHandler = ({ target: { name, value } }) => {
     setFormInput({ ...formInput, [name]: value });
@@ -28,9 +31,22 @@ function Login() {
 
     try {
       const result = await requestLogin('/login', { email, password });
-      console.log('CLG RESULT', result);
+
+      switch (result.role) {
+      case 'administrator':
+        history.push('/test');
+        break;
+      case 'customer':
+        history.push('/customer/products');
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      default:
+        history.push('/');
+      }
     } catch (error) {
-      console.log(error);
+      setFailLogin(true);
     }
   };
 
@@ -80,11 +96,17 @@ function Login() {
         </button>
       </form>
 
-      <span
-        data-testid="common_login__element-invalid-email"
-      >
-        Erro
-      </span>
+      {
+        failLogin
+        && (
+          <span
+            data-testid="common_login__element-invalid-email"
+          >
+            Erro
+          </span>
+        )
+
+      }
 
     </div>
   );
