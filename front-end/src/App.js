@@ -11,7 +11,7 @@ function App() {
         <Redirect to="/login" />
       </Route>
       <Route exact path="/login" component={ Login } />
-      <Route path="/customer/products" nome="test" component={ ProductClient } />
+      <Route path="/customer/products" component={ ProductClient } />
     </Switch>
   );
 }

@@ -1,39 +1,10 @@
-import PropTypes from 'prop-types';
+import NavBar from '../Componentes/NavBar';
 
-function ProductClient({ nome }) {
-  console.log(nome);
+function ProductClient() {
   return (
+    <NavBar item1="PRODUTOS" item2="MEUS PEDIDOS" item3="NOME" item4="Sair" />
 
-    <div>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        PRODUTOS
-      </button>
-
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-orders"
-      >
-        MEUS PEDIDOS
-      </button>
-      <p data-testid="customer_products__element-navbar-user-full-name">
-        { nome }
-      </p>
-
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-logout"
-      >
-        Sair
-      </button>
-    </div>
   );
 }
-
-ProductClient.propTypes = {
-  nome: PropTypes.string,
-}.isRequired;
 
 export default ProductClient;
