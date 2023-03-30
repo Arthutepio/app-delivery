@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { requestRegister } from '../services/requests';
 
 function Register() {
   const [formInput, setFormInput] = useState({ email: '', password: '', name: '' });
   const [isDisabled, setIsDisabled] = useState(true);
+  const [failRegister, setFailRegister] = useState(false);
+  const history = useHistory();
   const inputHandler = ({ target: { name, value } }) => {
     setFormInput({ ...formInput, [name]: value });
   };
@@ -20,6 +24,19 @@ function Register() {
 
     setIsDisabled(!validInput);
   }, [formInput]);
+
+  const resgister = async (event) => {
+    event.preventDefault();
+
+    const { email, password, name } = formInput;
+
+    try {
+      await requestRegister('/register', { name, email, password });
+      history.push('/customer/products');
+    } catch (error) {
+      setFailRegister(true);
+    }
+  };
 
   return (
     <div>
@@ -58,11 +75,22 @@ function Register() {
           type="button"
           data-testid="common_register__button-register"
           disabled={ isDisabled }
+          onClick={ (event) => resgister(event) }
         >
           Cadastrar
         </button>
       </form>
-      <span data-testid="common_register__element-invalid_register">Error</span>
+
+      {
+        failRegister
+        && (
+          <span
+            data-testid="common_register__element-invalid_register"
+          >
+            Erro
+          </span>
+        )
+      }
     </div>
   );
 }
