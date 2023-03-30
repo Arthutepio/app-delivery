@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { requestLogin } from '../services/requests';
 
 function Login() {
   const [formInput, setFormInput] = useState({ email: '', password: '' });
@@ -19,6 +20,20 @@ function Login() {
 
     setIsDisabled(!validInput);
   }, [formInput]);
+
+  const login = async (event) => {
+    event.preventDefault();
+
+    const { email, password } = formInput;
+
+    try {
+      // console.log(email, password);
+      const result = await requestLogin('/login', { email, password });
+      console.log('CLG RESULT', result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -53,6 +68,7 @@ function Login() {
           type="submit"
           data-testid="common_login__button-login"
           disabled={ isDisabled }
+          onClick={ (event) => login(event) }
         >
           Login
         </button>
