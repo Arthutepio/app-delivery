@@ -27,7 +27,6 @@ function Login() {
     const { email, password } = formInput;
 
     try {
-      // console.log(email, password);
       const result = await requestLogin('/login', { email, password });
       console.log('CLG RESULT', result);
     } catch (error) {

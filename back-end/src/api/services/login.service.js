@@ -1,12 +1,6 @@
 const { User } = require('../../database/models');
 
-const loginRequest = async ({ email }) => {
-  const user = await User.findOne({
-    where: { email },
-  });
-
-  return { status: 200, message: user };
-};
+const loginRequest = async ({ email }) => User.findOne({ where: { email } });
 
 module.exports = {
   loginRequest,
