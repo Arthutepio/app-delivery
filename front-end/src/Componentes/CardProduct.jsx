@@ -3,16 +3,19 @@ const PropTypes = require('prop-types');
 function CardProduct({ name, price, image, id }) {
   return (
     <div>
-      <p data-testid={ `customer_products__img-card-bg-title-${id}` }>
+      <span data-testid={ `customer_products__element-card-title-${id}` }>
         { name }
-      </p>
-      <p data-testid={ `customer_products__element-card-price-${id}` }>
+      </span>
+
+      <span data-testid={ `customer_products__element-card-price-${id}` }>
         { price }
-      </p>
+      </span>
+
       <img
         src={ image }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
+        width="50px"
       />
 
       <button
@@ -20,20 +23,18 @@ function CardProduct({ name, price, image, id }) {
         data-testid={ `customer_products__button-card-rm-item-${id}` }
       >
         -
-
       </button>
-      <span
-        data-testid={ `customer_products__input-card-quantity-${id}` }
-      >
-        ESTADO INICIANDO EM 0
 
-      </span>
+      <input
+        data-testid={ `customer_products__input-card-quantity-${id}` }
+        type="number"
+      />
+
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
       >
         +
-
       </button>
     </div>
   );
