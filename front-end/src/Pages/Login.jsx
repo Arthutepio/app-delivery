@@ -33,9 +33,9 @@ function Login() {
       const result = await requestLogin('/login', { email, password });
       console.log('result ===', result);
 
-      const { token, name, id, /* email, */ role } = result;
+      const { token, name, role } = result;
       setToken(token);
-      const storageObj = { token, name, id, email, role };
+      const storageObj = { name, email, role, token };
       localStorage.setItem('user', JSON.stringify(storageObj));
 
       switch (result.role) {

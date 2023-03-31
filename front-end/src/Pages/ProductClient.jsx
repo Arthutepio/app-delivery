@@ -7,9 +7,10 @@ import { setToken } from '../services/requests';
 
 function ProductClient() {
   const [username, setUsername] = useState('');
+
   const { products } = useContext(Context);
+
   const history = useHistory();
-  // console.log(products);
 
   useEffect(() => {
     (async () => {
@@ -19,7 +20,10 @@ function ProductClient() {
       const { name, token } = userObj;
       setUsername(name);
 
-      if (!token) return history.push('/');
+      if (!token) {
+        localStorage.removeItem('user');
+        return history.push('/login');
+      }
 
       setToken(token);
     })();
@@ -33,11 +37,23 @@ function ProductClient() {
           <CardProduct
             key={ product.id }
             name={ product.name }
-            price={ product.price }
+            price={ (product.price).toString().replace('.', ',') }
             image={ product.urlImage }
             id={ product.id }
           />))
       }
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+      >
+        Ver Carrinho
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          VALOR TOTAL
+
+        </span>
+      </button>
     </>
 
   );
