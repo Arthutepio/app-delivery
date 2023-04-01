@@ -6,7 +6,7 @@ import Context from '../Context/Context';
 import { setToken } from '../services/requests';
 
 function ProductClient() {
-  const { totalCart, products } = useContext(Context);
+  const { totalCart, products, isDisabledBtnCart } = useContext(Context);
 
   const [username, setUsername] = useState('');
 
@@ -45,17 +45,24 @@ function ProductClient() {
       <button
         type="button"
         data-testid="customer_products__button-cart"
+        disabled={ isDisabledBtnCart }
+        onClick={ () => history.push('/customer/checkout') }
       >
         Ver Carrinho:
-        <span
-          data-testid="customer_products__checkout-bottom-value"
-        >
-          {
-            (Math.round(totalCart * 100) / 100)
-              .toFixed(2)
-              .replace('.', ',')
-          }
-        </span>
+        {
+          totalCart
+            && (
+              <span
+                data-testid="customer_products__checkout-bottom-value"
+              >
+                {
+                  (Math.round(totalCart * 100) / 100)
+                    .toFixed(2)
+                    .replace('.', ',')
+                }
+              </span>
+            )
+        }
       </button>
     </>
 

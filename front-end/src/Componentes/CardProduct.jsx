@@ -5,12 +5,14 @@ const PropTypes = require('prop-types');
 
 function CardProduct({ name, price, image, id }) {
   const [quantity, setQuantity] = useState(0);
-  const { setTotalCart } = useContext(Context);
+  const { setTotalCart, setIsDisabledBtnCart } = useContext(Context);
 
   const totalPriceCart = () => {
     const items = JSON.parse(localStorage.getItem('cart')) || [];
     const total = items.reduce((acc, curr) => curr.total + acc, 0);
-
+    if (total > 0) {
+      setIsDisabledBtnCart(false);
+    }
     setTotalCart(total);
   };
 

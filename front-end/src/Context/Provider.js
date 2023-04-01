@@ -6,6 +6,7 @@ import { requestData } from '../services/requests';
 function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
+  const [isDisabledBtnCart, setIsDisabledBtnCart] = useState(true);
 
   useEffect(() => {
     const apiProducts = async () => {
@@ -18,10 +19,13 @@ function Provider({ children }) {
   const context = useMemo(() => ({
     products,
     totalCart,
+    isDisabledBtnCart,
     setTotalCart,
+    setIsDisabledBtnCart,
   }), [
     products,
     totalCart,
+    isDisabledBtnCart,
   ]);
   return (
     <Context.Provider value={ context }>
