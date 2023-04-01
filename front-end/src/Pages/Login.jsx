@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { requestLogin } from '../services/requests';
+import { requestLogin, setToken } from '../services/requests';
 
 function Login() {
   const [formInput, setFormInput] = useState({ email: '', password: '' });
@@ -31,6 +31,12 @@ function Login() {
 
     try {
       const result = await requestLogin('/login', { email, password });
+      console.log('result ===', result);
+
+      const { token, name, role } = result;
+      setToken(token);
+      const storageObj = { name, email, role, token };
+      localStorage.setItem('user', JSON.stringify(storageObj));
 
       switch (result.role) {
       case 'administrator':

@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 function NavBar({ item1, item2, item3, item4 }) {
+  const history = useHistory();
+
+  const clearLocalStora = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   return (
 
     <div>
@@ -24,6 +32,7 @@ function NavBar({ item1, item2, item3, item4 }) {
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
+        onClick={ clearLocalStora }
       >
         {item4}
       </button>
