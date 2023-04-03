@@ -40,7 +40,7 @@ function Login() {
 
       switch (result.role) {
       case 'administrator':
-        history.push('/test');
+        history.push('/admin/manage');
         break;
       case 'customer':
         history.push('/customer/products');
