@@ -31,9 +31,15 @@ function CardProduct({ name, price, image, id }) {
         const newItem = { id, name, image, price, quantity: newQuantity, total };
         items.push(newItem);
       }
+
+      localStorage.setItem('cart', JSON.stringify(items));
     }
 
-    localStorage.setItem('cart', JSON.stringify(items));
+    if (newQuantity === 0) {
+      const result = items.filter((item) => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(result));
+    }
+
     totalPriceCart();
   };
 
@@ -45,9 +51,15 @@ function CardProduct({ name, price, image, id }) {
 
   const handleDecreaseButton = () => {
     if (quantity > 0) {
-      const newQuanity = quantity - 1;
-      setQuantity(newQuanity);
-      updateGlobalQuantity(newQuanity);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      updateGlobalQuantity(newQuantity);
+    }
+
+    if (quantity === 0) {
+      const newQuantity = 0;
+      setQuantity(newQuantity);
+      updateGlobalQuantity(newQuantity);
     }
   };
 
