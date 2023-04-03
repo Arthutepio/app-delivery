@@ -3,8 +3,8 @@ const cors = require('cors');
 const loginRoutes = require('./routes/login.routes');
 const productRoutes = require('./routes/product.routes');
 const registerRoutes = require('./routes/register.routes');
-const ErrorHandler = require('./middlewares/ErrorHandler');
 const saleRoutes = require('./routes/sale.routes');
+const ErrorHandler = require('./middlewares/ErrorHandler'); 
 
 const app = express();
 app.use(cors());
