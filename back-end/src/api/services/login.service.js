@@ -17,7 +17,6 @@ const loginRequest = async ({ email, password }) => {
 
   const payload = { email: user.email, role: user.role, name: user.name };
   const token = await generateToken(payload);
-  console.log('token ====', token);
 
   return {
     token,

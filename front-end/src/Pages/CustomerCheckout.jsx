@@ -7,12 +7,19 @@ function CustomerCheckout() {
   const cartItems = JSON.parse(localStorage.getItem('cart'));
 
   const [totalValue, setTotalValue] = useState(0);
+  const [cartStorage, setCartStorage] = useState(cartItems);
 
   useEffect(() => {
-    cartItems.forEach(({ total }) => {
-      setTotalValue((prevState) => prevState + total);
-    });
-  }, []);
+    const newTotal = cartStorage.reduce((acc, curr) => acc + curr.total, 0);
+    setTotalValue(newTotal);
+  }, [cartStorage]);
+
+  const onClickRemoveButton = (id) => {
+    const newItems = cartStorage.filter((item) => item.id !== id);
+    localStorage.setItem('cart', JSON.stringify(newItems));
+
+    setCartStorage(newItems);
+  };
 
   return (
     <div>
@@ -33,7 +40,7 @@ function CustomerCheckout() {
 
         <tbody>
           {
-            cartItems.map(({ id, name, quantity, price, total }, index) => (
+            cartStorage.map(({ id, name, quantity, price, total }, index) => (
               <tr key={ id }>
                 <td
                   data-testid={
@@ -81,6 +88,7 @@ function CustomerCheckout() {
                     data-testid={
                       `customer_checkout__element-order-table-remove-${index}`
                     }
+                    onClick={ () => onClickRemoveButton(id) }
                   >
                     Remover
                   </button>
