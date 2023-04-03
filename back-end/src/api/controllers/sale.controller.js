@@ -10,7 +10,6 @@ const findAllSeller = async (_req, res, next) => {
   }
 };
 
-
 const createSale = async (req, res, next) => {
   try {
      await saleService.createSale(req.body);

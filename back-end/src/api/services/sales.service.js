@@ -1,4 +1,3 @@
-
 const { User, Sale, SaleProduct } = require('../../database/models');
 
 const GenericError = require('../utils/GenericError');
