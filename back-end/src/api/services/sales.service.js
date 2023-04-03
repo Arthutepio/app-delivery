@@ -1,4 +1,6 @@
+
 const { User, Sale, SaleProduct } = require('../../database/models');
+
 const GenericError = require('../utils/GenericError');
 
 const findAllSeller = async () => {
@@ -48,5 +50,4 @@ const createSale = async (body) => {
 module.exports = {
   findAllSeller,
   createSale,
-  
 };

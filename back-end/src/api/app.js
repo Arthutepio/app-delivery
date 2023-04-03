@@ -5,6 +5,7 @@ const productRoutes = require('./routes/product.routes');
 const registerRoutes = require('./routes/register.routes');
 const saleRoutes = require('./routes/sale.routes');
 const ErrorHandler = require('./middlewares/ErrorHandler');
+const saleRoutes = require('./routes/sale.routes');
 
 const app = express();
 app.use(cors());
