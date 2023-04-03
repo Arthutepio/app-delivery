@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
 
@@ -6,7 +6,13 @@ function CustomerCheckout() {
   const { username } = useContext(Context);
   const cartItems = JSON.parse(localStorage.getItem('cart'));
 
-  console.log(cartItems);
+  const [totalValue, setTotalValue] = useState(0);
+
+  useEffect(() => {
+    cartItems.forEach(({ total }) => {
+      setTotalValue((prevState) => prevState + total);
+    });
+  }, []);
 
   return (
     <div>
@@ -66,7 +72,7 @@ function CustomerCheckout() {
                     `customer_checkout__element-order-table-sub-total-${index}`
                   }
                 >
-                  { total }
+                  { total.toFixed(2).replace('.', ',') }
                 </td>
 
                 <td>
@@ -83,13 +89,14 @@ function CustomerCheckout() {
             ))
           }
         </tbody>
-
-        <span
-          data-testid="customer_checkout__element-order-total-price"
-        >
-          { `Valor total: ${'teste'}`}
-        </span>
       </table>
+
+      <span>Total: R$ </span>
+      <span
+        data-testid="customer_checkout__element-order-total-price"
+      >
+        { totalValue.toFixed(2).replace('.', ',') }
+      </span>
 
       <form action="">
         <label htmlFor="select">
