@@ -12,5 +12,19 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "afc715ad-4350-45b9-8d57-e97e130f9375",
+    "colId": "history",
+    "containerId": "",
+    "name": "FindAll Sellers",
+    "url": "localhost:3001/sellers",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-30T21:07:16.085Z",
+    "modified": "2023-04-03T20:27:03.637Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
