@@ -4,6 +4,7 @@ const loginRoutes = require('./routes/login.routes');
 const productRoutes = require('./routes/product.routes');
 const registerRoutes = require('./routes/register.routes');
 const ErrorHandler = require('./middlewares/ErrorHandler');
+const saleRoutes = require('./routes/sale.routes');
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use(loginRoutes);
 app.use(productRoutes);
 app.use(registerRoutes);
+app.use(saleRoutes);
 
 app.use(ErrorHandler.handle);
 // app.use(imagesRoutes);
