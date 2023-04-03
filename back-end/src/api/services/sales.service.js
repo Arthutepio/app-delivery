@@ -1,4 +1,4 @@
-const { User, Sale } = require('../../database/models');
+const { User, Sale, SaleProduct } = require('../../database/models');
 const GenericError = require('../utils/GenericError');
 
 const findAllSeller = async () => {
@@ -22,11 +22,18 @@ const findUser = async (email) => {
   return user;
 };
 
+const createSaleProducts = async (saleId, products) => {
+  await Promise.all(
+    products.map(async ({ id, quantity }) => 
+      SaleProduct.create({ saleId, productId: id, quantity })),
+  );
+};
+
 const createSale = async (body) => {
-  const { email, sellerId, totalPrice, deliveryAdress, deliveryNumber } = body;
-  const { id } = await findUser(email);
-  const newSale = await Sale.create({
-    userId: id,
+  const { email, sellerId, totalPrice, deliveryAdress, deliveryNumber, products } = body;
+  const { id: userId } = await findUser(email);
+  const { id } = await Sale.create({
+    userId,
     sellerId,
     totalPrice,
     deliveryAdress,
@@ -34,10 +41,12 @@ const createSale = async (body) => {
     saleDate: new Date(),
     status: 'Pendente',
   });
-  return newSale;
+  
+  await createSaleProducts(id, products);
 };
 
 module.exports = {
   findAllSeller,
-  createSale, 
+  createSale,
+  
 };

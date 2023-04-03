@@ -10,14 +10,13 @@ const findAllSeller = async (_req, res, next) => {
   }
 };
 
-const createSale = async (req, res, _next) => {
-  // try {
-    const newSale = await saleService.createSale(req.body);
-
-    return res.status(201).json(newSale);
-  // } catch (error) {
-  //   next(error);
-  // }
+const createSale = async (req, res, next) => {
+  try {
+     await saleService.createSale(req.body);
+    return res.status(201).end();
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
