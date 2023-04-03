@@ -7,6 +7,7 @@ function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
   const [isDisabledBtnCart, setIsDisabledBtnCart] = useState(true);
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     const apiProducts = async () => {
@@ -22,10 +23,13 @@ function Provider({ children }) {
     isDisabledBtnCart,
     setTotalCart,
     setIsDisabledBtnCart,
+    username,
+    setUsername,
   }), [
     products,
     totalCart,
     isDisabledBtnCart,
+    username,
   ]);
   return (
     <Context.Provider value={ context }>

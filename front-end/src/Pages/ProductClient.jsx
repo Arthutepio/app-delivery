@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import CardProduct from '../Componentes/CardProduct';
 import NavBar from '../Componentes/NavBar';
@@ -6,9 +6,9 @@ import Context from '../Context/Context';
 import { setToken } from '../services/requests';
 
 function ProductClient() {
-  const { totalCart, products, isDisabledBtnCart } = useContext(Context);
-
-  const [username, setUsername] = useState('');
+  const {
+    totalCart, products, isDisabledBtnCart, username, setUsername,
+  } = useContext(Context);
 
   const history = useHistory();
 
