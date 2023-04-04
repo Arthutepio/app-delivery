@@ -33,13 +33,13 @@ function CustomerCheckout() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { deliveryAdress, deliveryNumber } = formInput;
+    const { deliveryAddress, deliveryNumber } = formInput;
 
     const objAPI = {
       email,
       sellerId: 2,
       totalPrice: totalValue,
-      deliveryAdress,
+      deliveryAddress,
       deliveryNumber,
       products,
     };
@@ -168,7 +168,7 @@ function CustomerCheckout() {
         <label htmlFor="address">
           <span>Endereço</span>
           <input
-            name="deliveryAdress"
+            name="deliveryAddress"
             type="text"
             id="address"
             data-testid="customer_checkout__input-address"
