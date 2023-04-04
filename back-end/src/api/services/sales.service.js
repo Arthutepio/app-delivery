@@ -31,13 +31,13 @@ const createSaleProducts = async (saleId, products) => {
 };
 
 const createSale = async (body) => {
-  const { email, sellerId, totalPrice, deliveryAdress, deliveryNumber, products } = body;
+  const { email, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
   const { id: userId } = await findUser(email);
   const { id } = await Sale.create({
     userId,
     sellerId,
     totalPrice,
-    deliveryAdress,
+    deliveryAddress,
     deliveryNumber,
     saleDate: new Date(),
     status: 'Pendente',

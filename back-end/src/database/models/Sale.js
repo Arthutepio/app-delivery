@@ -4,7 +4,7 @@ const Sale = (sequelize, DataTypes ) => {
     userId: { type: DataTypes.INTEGER, foreignKey: true },
     sellerId: { type: DataTypes.INTEGER, foreignKey: true },
     totalPrice: { type: DataTypes.DECIMAL(9,2) },
-    deliveryAdress: { type: DataTypes.STRING },
+    deliveryAddress: { type: DataTypes.STRING },
     deliveryNumber: { type: DataTypes.STRING },
     saleDate: { type: DataTypes.DATE },
     status: { type: DataTypes.STRING },
