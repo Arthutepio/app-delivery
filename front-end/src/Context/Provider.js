@@ -8,11 +8,16 @@ function Provider({ children }) {
   const [totalCart, setTotalCart] = useState(0);
   const [isDisabledBtnCart, setIsDisabledBtnCart] = useState(true);
   const [username, setUsername] = useState('');
+  const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
     const apiProducts = async () => {
       const allProducts = await requestData('products');
+      const allSellers = await requestData('sellers');
+      console.log('allSellers ===', allSellers);
+
       setProducts(allProducts);
+      setSellers(allSellers);
     };
     apiProducts();
   }, []);
@@ -25,11 +30,14 @@ function Provider({ children }) {
     setIsDisabledBtnCart,
     username,
     setUsername,
+    sellers,
+    setSellers,
   }), [
     products,
     totalCart,
     isDisabledBtnCart,
     username,
+    sellers,
   ]);
   return (
     <Context.Provider value={ context }>

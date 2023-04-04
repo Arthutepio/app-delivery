@@ -31,7 +31,6 @@ function Login() {
 
     try {
       const result = await requestLogin('/login', { email, password });
-      console.log('result ===', result);
 
       const { token, name, role } = result;
       setToken(token);
