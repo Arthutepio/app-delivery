@@ -13,7 +13,7 @@ const findAllSeller = async (_req, res, next) => {
 const createSale = async (req, res, next) => {
   try {
     const result = await saleService.createSale(req.body);
-    // return res.status(201).end();
+    
     return res.status(201).json(result);
   } catch (error) {
     next(error);
