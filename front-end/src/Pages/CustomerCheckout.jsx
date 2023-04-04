@@ -1,18 +1,54 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
+import { requestLogin } from '../services/requests';
 
 function CustomerCheckout() {
-  const { username } = useContext(Context);
+  const { username, sellers } = useContext(Context);
   const cartItems = JSON.parse(localStorage.getItem('cart'));
-
-  const [totalValue, setTotalValue] = useState(0);
+  const [formInput, setFormInput] = useState({});
+  const [email, setEmail] = useState('');
   const [cartStorage, setCartStorage] = useState(cartItems);
+  const [totalValue, setTotalValue] = useState(0);
+  const [products, setProducts] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const newTotal = cartStorage.reduce((acc, curr) => acc + curr.total, 0);
     setTotalValue(newTotal);
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    setEmail(user.email);
+
+    const listProducts = [];
+    cartStorage.map(({ id, quantity }) => listProducts.push({ id, quantity }));
+    setProducts(listProducts);
   }, [cartStorage]);
+
+  const inputHandler = ({ target: { name, value } }) => {
+    setFormInput({ ...formInput, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { deliveryAdress, deliveryNumber } = formInput;
+
+    const objAPI = {
+      email,
+      sellerId: 2,
+      totalPrice: totalValue,
+      deliveryAdress,
+      deliveryNumber,
+      products,
+    };
+    console.log('objAPI ==', objAPI);
+
+    const idSale = await requestLogin('createsale', objAPI);
+
+    history.push(`/customer/orders/${idSale}`);
+  };
 
   const onClickRemoveButton = (id) => {
     const newItems = cartStorage.filter((item) => item.id !== id);
@@ -23,7 +59,7 @@ function CustomerCheckout() {
 
   return (
     <div>
-      <h1>Customer Ceckout</h1>
+      <h1>Customer Checkout</h1>
       <NavBar item1="PRODUTOS" item2="MEUS PEDIDOS" item3={ username } item4="Sair" />
 
       <table>
@@ -106,15 +142,24 @@ function CustomerCheckout() {
         { totalValue.toFixed(2).replace('.', ',') }
       </span>
 
-      <form action="">
+      <form action="" onSubmit={ handleSubmit }>
         <label htmlFor="select">
           <span>P. Vendedora Responsável</span>
           <select
-            name=""
+            name="sellerId"
             id="select"
             data-testid="customer_checkout__select-seller"
           >
-            <option value="teste">Teste</option>
+            {
+              sellers.map(({ id, name }) => (
+                <option
+                  key={ id }
+                  value={ id }
+                >
+                  { name }
+                </option>
+              ))
+            }
           </select>
         </label>
 
@@ -123,9 +168,11 @@ function CustomerCheckout() {
         <label htmlFor="address">
           <span>Endereço</span>
           <input
+            name="deliveryAdress"
             type="text"
             id="address"
             data-testid="customer_checkout__input-address"
+            onChange={ inputHandler }
           />
         </label>
 
@@ -134,9 +181,11 @@ function CustomerCheckout() {
         <label htmlFor="number">
           <span>Número</span>
           <input
-            type="text"
+            name="deliveryNumber"
+            type="number"
             id="number"
             data-testid="customer_checkout__input-address-number"
+            onChange={ inputHandler }
           />
         </label>
 

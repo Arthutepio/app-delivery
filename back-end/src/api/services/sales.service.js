@@ -25,7 +25,7 @@ const findUser = async (email) => {
 
 const createSaleProducts = async (saleId, products) => {
   await Promise.all(
-    products.map(async ({ id, quantity }) => 
+    products.map(async ({ id, quantity }) =>
       SaleProduct.create({ saleId, productId: id, quantity })),
   );
 };
@@ -42,8 +42,9 @@ const createSale = async (body) => {
     saleDate: new Date(),
     status: 'Pendente',
   });
-  
+
   await createSaleProducts(id, products);
+  return id;
 };
 
 module.exports = {
