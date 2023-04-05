@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
+import { requestRegister } from '../services/requests';
 
 export default function ManagerUser() {
   const { username } = useContext(Context);
+  const [failRegister, setFailRegister] = useState(false);
   const [formInput, setFormInput] = useState(
     { email: '', password: '', name: '', role: 'seller' },
   );
@@ -29,6 +31,12 @@ export default function ManagerUser() {
 
   const cadastrarUser = async (event) => {
     event.preventDefault();
+    try {
+      await requestRegister('/registeradm', { ...formInput });
+      setFormInput({ email: '', password: '', name: '', role: 'seller' });
+    } catch (error) {
+      setFailRegister(true);
+    }
   };
 
   return (
@@ -43,6 +51,7 @@ export default function ManagerUser() {
             type="text"
             id="nome"
             name="name"
+            value={ formInput.name }
             data-testid="admin_manage__input-name"
             onChange={ inputHandler }
           />
@@ -53,6 +62,7 @@ export default function ManagerUser() {
             type="email"
             id="email"
             name="email"
+            value={ formInput.email }
             data-testid="admin_manage__input-email"
             onChange={ inputHandler }
           />
@@ -63,6 +73,7 @@ export default function ManagerUser() {
             type="password"
             id="password"
             name="password"
+            value={ formInput.password }
             data-testid="admin_manage__input-password"
             onChange={ inputHandler }
           />
@@ -91,6 +102,17 @@ export default function ManagerUser() {
           Cadastrar
         </button>
       </form>
+
+      {
+        failRegister
+        && (
+          <span
+            data-testid="admin_manage__element-invalid-register"
+          >
+            Erro
+          </span>
+        )
+      }
     </>
   );
 }
