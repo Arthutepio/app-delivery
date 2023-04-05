@@ -10,6 +10,17 @@ const findAllOrders = async (req, res, next) => {
   }
 };
 
+const findOneDetails = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const detailsOrder = await orderService.findOneDetails(id);
+    return res.status(200).json(detailsOrder);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   findAllOrders,
+  findOneDetails,
 };

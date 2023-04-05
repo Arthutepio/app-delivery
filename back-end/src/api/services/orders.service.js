@@ -1,4 +1,4 @@
-const { Sale } = require('../../database/models');
+const { Sale, Product } = require('../../database/models');
 const GenericError = require('../utils/GenericError');
 
 const findAllOrders = async (id, next) => {
@@ -15,6 +15,15 @@ const findAllOrders = async (id, next) => {
   }
 };
 
+const findOneDetails = async (id) => {
+  const data = await Sale.findOne({
+    where: { id },
+    include: [{ model: Product, as: 'products', through: { attibutes: [] } }],
+  });
+  return data;
+};
+
 module.exports = {
   findAllOrders,
+  findOneDetails,
 };
