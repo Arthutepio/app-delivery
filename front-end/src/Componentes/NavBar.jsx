@@ -30,6 +30,18 @@ function NavBar({ item1, item2, item3, item4 }) {
         </button>
       </a>
 
+      {
+        item2 && (
+          <button
+            type="button"
+            data-testid="customer_products__element-navbar-link-orders"
+            onClick={ () => history.push('orders') }
+          >
+            {item2}
+          </button>
+        )
+      }
+
       <p data-testid="customer_products__element-navbar-user-full-name">
         {item3}
       </p>

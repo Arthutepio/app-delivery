@@ -2,7 +2,7 @@ const generateHash = require('md5');
 const { User } = require('../../database/models');
 const GenericError = require('../utils/GenericError');
 
-const registerRequest = async ({ name, email, password }) => {
+const registerRequest = async ({ name, email, password, role }) => {
   const user = await User.findOne({ where: { email } });
 
   if (user) {
@@ -11,7 +11,7 @@ const registerRequest = async ({ name, email, password }) => {
 
   const hash = generateHash(password);
 
-  const newUser = await User.create({ name, email, password: hash, role: 'customer' });
+  const newUser = await User.create({ name, email, password: hash, role: role || 'customer' });
 
   return {
     id: newUser.id,

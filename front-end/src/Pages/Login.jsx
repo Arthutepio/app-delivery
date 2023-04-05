@@ -4,7 +4,7 @@ import { requestLogin, setToken } from '../services/requests';
 import Context from '../Context/Context';
 
 function Login() {
-  const { setUserEmail, setUserId, setTokenGlobal } = useContext(Context);
+  const { setUserEmail, setUserId, setTokenGlobal, setUsername } = useContext(Context);
   const [formInput, setFormInput] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(true);
   const [failLogin, setFailLogin] = useState(false);
@@ -38,6 +38,7 @@ function Login() {
       setToken(token);
       const storageObj = { name, email, role, token, id };
       localStorage.setItem('user', JSON.stringify(storageObj));
+      setUsername(name);
       setUserEmail(email);
       setUserId(id);
       setTokenGlobal(token);
