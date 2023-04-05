@@ -49,6 +49,9 @@ function CustomerCheckout() {
     const allOrders = await requestData(`orders/${user.id}`);
     localStorage.setItem('orders', JSON.stringify(allOrders));
 
+    const result = await requestData(`/orders/details/${idSale}`);
+    localStorage.setItem('orderDetails', JSON.stringify(result));
+
     history.push(`/customer/orders/${idSale}`);
   };
 
