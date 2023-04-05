@@ -13,6 +13,12 @@ export const requestData = async (endpoint) => {
   return data;
 };
 
+// export const requestDataBody = async (endpoint, body) => {
+//   const data = await api.post(endpoint, body);
+//   console.log(data);
+//   return data;
+// };
+
 export const requestLogin = async (endpoint, body) => {
   const { data } = await api.post(endpoint, body);
   return data;

@@ -4,6 +4,6 @@ const orderController = require('../controllers/order.controller');
 
 const orderRoutes = express.Router();
 
-orderRoutes.get('/orders/user', orderController.findAllOrders);
+orderRoutes.get('/orders/:id', orderController.findAllOrders);
 
 module.exports = orderRoutes;

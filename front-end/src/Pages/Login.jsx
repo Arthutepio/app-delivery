@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { requestLogin, setToken } from '../services/requests';
+import Context from '../Context/Context';
 
 function Login() {
+  const { setUserEmail, setUserId, setTokenGlobal } = useContext(Context);
   const [formInput, setFormInput] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(true);
   const [failLogin, setFailLogin] = useState(false);
@@ -32,10 +34,13 @@ function Login() {
     try {
       const result = await requestLogin('/login', { email, password });
 
-      const { token, name, role } = result;
+      const { token, name, role, id } = result;
       setToken(token);
-      const storageObj = { name, email, role, token };
+      const storageObj = { name, email, role, token, id };
       localStorage.setItem('user', JSON.stringify(storageObj));
+      setUserEmail(email);
+      setUserId(id);
+      setTokenGlobal(token);
 
       switch (result.role) {
       case 'administrator':

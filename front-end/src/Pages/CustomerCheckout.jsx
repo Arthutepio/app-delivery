@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
-import { requestLogin } from '../services/requests';
+import { requestLogin, requestData } from '../services/requests';
 
 function CustomerCheckout() {
   const { username, sellers } = useContext(Context);
@@ -43,11 +43,15 @@ function CustomerCheckout() {
       deliveryNumber,
       products,
     };
-    console.log('objAPI ==', objAPI);
 
     const idSale = await requestLogin('createsale', objAPI);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const allOrders = await requestData(`orders/${user.id}`);
+    console.log(allOrders);
+    localStorage.setItem('orders', JSON.stringify(allOrders));
 
     history.push(`/customer/orders/${idSale}`);
+    // history.push('/customer/orders/');
   };
 
   const onClickRemoveButton = (id) => {
