@@ -8,13 +8,16 @@ function Provider({ children }) {
   const [totalCart, setTotalCart] = useState(0);
   const [isDisabledBtnCart, setIsDisabledBtnCart] = useState(true);
   const [username, setUsername] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   const [sellers, setSellers] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [userId, setUserId] = useState();
+  const [token, setTokenGlobal] = useState('');
 
   useEffect(() => {
     const apiProducts = async () => {
       const allProducts = await requestData('products');
       const allSellers = await requestData('sellers');
-      console.log('allSellers ===', allSellers);
 
       setProducts(allProducts);
       setSellers(allSellers);
@@ -32,12 +35,24 @@ function Provider({ children }) {
     setUsername,
     sellers,
     setSellers,
+    userEmail,
+    setUserEmail,
+    orders,
+    setOrders,
+    userId,
+    setUserId,
+    token,
+    setTokenGlobal,
   }), [
     products,
     totalCart,
     isDisabledBtnCart,
     username,
     sellers,
+    userEmail,
+    orders,
+    userId,
+    token,
   ]);
   return (
     <Context.Provider value={ context }>

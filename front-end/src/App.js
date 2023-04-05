@@ -5,18 +5,27 @@ import Login from './Pages/Login';
 import ProductClient from './Pages/ProductClient';
 import Register from './Pages/Register';
 import CustomerCheckout from './Pages/CustomerCheckout';
+import CustomerOrder from './Pages/CustomerOrder';
 
 function App() {
+  const { token } = JSON.parse(localStorage.getItem('user')) || '';
   return (
     <Switch>
       <Route exact path="/">
-        <Redirect to="/login" />
+        <Redirect to={ token ? '/customer/products' : '/login' } />
       </Route>
+      {
+        token && (
+          <Route exact path="/login">
+            <Redirect to="/customer/products" />
+          </Route>
+        )
+      }
       <Route exact path="/login" component={ Login } />
       <Route path="/customer/products" component={ ProductClient } />
       <Route exact path="/register" component={ Register } />
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
-
+      <Route exact path="/customer/orders/" component={ CustomerOrder } />
     </Switch>
   );
 }

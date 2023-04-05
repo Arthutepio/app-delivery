@@ -22,6 +22,7 @@ function NavBar({ item1, item2, item3, item4 }) {
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
+        onClick={ () => history.push('orders') }
       >
         {item2}
       </button>
