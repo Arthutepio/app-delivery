@@ -15,6 +15,15 @@ const findAllOrders = async (id, next) => {
   }
 };
 
+const findOneDetails = async (id) => {
+  const data = await Sale.findOne({
+    where: { id },
+    include: [{ model: Product, as: 'products', through: { attibutes: [] } }],
+  });
+  return data;
+};
+
 module.exports = {
   findAllOrders,
+  findOneDetails,
 };
