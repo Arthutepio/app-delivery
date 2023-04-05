@@ -47,11 +47,9 @@ function CustomerCheckout() {
     const idSale = await requestLogin('createsale', objAPI);
     const user = JSON.parse(localStorage.getItem('user'));
     const allOrders = await requestData(`orders/${user.id}`);
-    console.log(allOrders);
     localStorage.setItem('orders', JSON.stringify(allOrders));
 
     history.push(`/customer/orders/${idSale}`);
-    // history.push('/customer/orders/');
   };
 
   const onClickRemoveButton = (id) => {

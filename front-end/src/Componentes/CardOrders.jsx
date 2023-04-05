@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { useHistory } from 'react-router-dom';
 
 function CardOrders({ id, status, price, date }) {
-  // const history = useHistory();
-  // const handleRedirect = () => {
-  //   history.push(`${id}`);
-  // };
-
   return (
     <Link to={ `/customer/orders/${id}` }>
       <div>
