@@ -6,6 +6,7 @@ import ProductClient from './Pages/ProductClient';
 import Register from './Pages/Register';
 import CustomerCheckout from './Pages/CustomerCheckout';
 import CustomerOrder from './Pages/CustomerOrder';
+import OrderDetails from './Pages/OrderDetails';
 
 function App() {
   const { token } = JSON.parse(localStorage.getItem('user')) || '';
@@ -26,6 +27,7 @@ function App() {
       <Route exact path="/register" component={ Register } />
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
       <Route exact path="/customer/orders/" component={ CustomerOrder } />
+      <Route exact path="/customer/orders/:id" component={ OrderDetails } />
     </Switch>
   );
 }
