@@ -18,11 +18,11 @@
     "colId": "history",
     "containerId": "",
     "name": "FindAll Sellers",
-    "url": "localhost:3001/sellers",
+    "url": "localhost:3001/sale/2",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-03-30T21:07:16.085Z",
-    "modified": "2023-04-03T20:27:03.637Z",
+    "modified": "2023-04-05T22:42:10.849Z",
     "headers": [],
     "params": [],
     "tests": []
