@@ -1,4 +1,4 @@
-const { Sale } = require('../../database/models');
+const { Sale, Product } = require('../../database/models');
 const GenericError = require('../utils/GenericError');
 
 const findAllOrders = async (id, next) => {
