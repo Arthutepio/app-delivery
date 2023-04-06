@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { requestLogin, setToken } from '../services/requests';
+import { requestData, requestLogin, setToken } from '../services/requests';
 import Context from '../Context/Context';
 
 function Login() {
@@ -42,6 +42,10 @@ function Login() {
       setUserEmail(email);
       setUserId(id);
       setTokenGlobal(token);
+      setUsername(name);
+
+      const sellerOrders = await requestData(`sale/${id}`);
+      localStorage.setItem('sellerOrders', JSON.stringify(sellerOrders));
 
       switch (result.role) {
       case 'administrator':
