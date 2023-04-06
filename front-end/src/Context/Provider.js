@@ -13,6 +13,9 @@ function Provider({ children }) {
   const [orders, setOrders] = useState([]);
   const [userId, setUserId] = useState();
   const [token, setTokenGlobal] = useState('');
+  const [updatedOrders, setUpdatedOrders] = useState(
+    JSON.parse(localStorage.getItem('orders')),
+  );
 
   useEffect(() => {
     const apiProducts = async () => {
@@ -24,6 +27,18 @@ function Provider({ children }) {
     };
     apiProducts();
   }, []);
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const newRequest = async () => {
+    const sellerOrders = await requestData(`orders/${user.id}`);
+    setUpdatedOrders(sellerOrders);
+    return sellerOrders;
+  };
+
+  useEffect(() => {
+    newRequest();
+  }, [updatedOrders]);
 
   const context = useMemo(() => ({
     products,
@@ -43,6 +58,8 @@ function Provider({ children }) {
     setUserId,
     token,
     setTokenGlobal,
+    updatedOrders,
+    setUpdatedOrders,
   }), [
     products,
     totalCart,
@@ -53,6 +70,7 @@ function Provider({ children }) {
     orders,
     userId,
     token,
+    updatedOrders,
   ]);
   return (
     <Context.Provider value={ context }>
