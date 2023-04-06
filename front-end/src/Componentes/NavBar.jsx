@@ -21,14 +21,19 @@ function NavBar({ item1, item2, item3, item4 }) {
         </button>
       </a>
 
-      <a href="/customer/orders">
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          {item2}
-        </button>
-      </a>
+      {
+        item2 && (
+          <a href="/customer/orders">
+            <button
+              type="button"
+              data-testid="customer_products__element-navbar-link-orders"
+              onClick={ () => history.push('orders') }
+            >
+              {item2}
+            </button>
+          </a>
+        )
+      }
 
       <p data-testid="customer_products__element-navbar-user-full-name">
         {item3}

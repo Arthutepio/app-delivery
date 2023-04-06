@@ -7,6 +7,7 @@ import Register from './Pages/Register';
 import CustomerCheckout from './Pages/CustomerCheckout';
 import CustomerOrder from './Pages/CustomerOrder';
 import OrderDetails from './Pages/OrderDetails';
+import SellerOrders from './Pages/SellerOrders';
 
 function App() {
   const { token } = JSON.parse(localStorage.getItem('user')) || '';
@@ -28,6 +29,7 @@ function App() {
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
       <Route exact path="/customer/orders/" component={ CustomerOrder } />
       <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+      <Route exact path="/seller/orders" component={ SellerOrders } />
     </Switch>
   );
 }
