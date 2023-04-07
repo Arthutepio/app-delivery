@@ -28,18 +28,6 @@ function Provider({ children }) {
     apiProducts();
   }, []);
 
-  const user = JSON.parse(localStorage.getItem('user'));
-
-  const newRequest = async () => {
-    const sellerOrders = await requestData(`orders/${user.id}`);
-    setUpdatedOrders(sellerOrders);
-    return sellerOrders;
-  };
-
-  useEffect(() => {
-    newRequest();
-  }, [updatedOrders]);
-
   const context = useMemo(() => ({
     products,
     totalCart,

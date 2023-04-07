@@ -1,9 +1,23 @@
-import React, { useContext } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
+import { requestData } from '../services/requests';
 
-function OrderDetails() {
+function OrderDetails({ match: { params: { id: saleId } } }) {
   const { username } = useContext(Context);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const newRequest = async () => {
+    const { sellerId } = JSON.parse(localStorage.getItem('orderDetails'));
+    const updatedOrders = await requestData(`sale/${sellerId}`);
+    const especificOrder = updatedOrders.find(({ id }) => id === Number(saleId));
+    localStorage.setItem('orderDetails', JSON.stringify(especificOrder));
+  };
+
+  useEffect(() => newRequest(), []);
+
   const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
   const { id, saleDate, status, totalPrice, products } = orderDetails;
 
@@ -44,7 +58,7 @@ function OrderDetails() {
         <button
           type="button"
           data-testid="customer_order_details__button-delivery-check"
-          disabled
+          disabled={ isButtonDisabled }
         >
           Marcar como entregue
         </button>
@@ -119,5 +133,13 @@ function OrderDetails() {
     </div>
   );
 }
+
+OrderDetails.propTypes = {
+  match: {
+    params: {
+      id: PropTypes.string,
+    },
+  },
+}.isRequired;
 
 export default OrderDetails;

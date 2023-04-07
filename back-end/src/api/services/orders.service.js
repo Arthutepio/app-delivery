@@ -3,7 +3,10 @@ const GenericError = require('../utils/GenericError');
 
 const findAllOrders = async (id, next) => {
   try {
-    const userFindAllOrders = await Sale.findAll({ where: { userId: id } });
+    const userFindAllOrders = await Sale.findAll({
+      where: { userId: id },
+      include: [{ model: Product, as: 'products', through: { attibutes: [] } }],
+     });
     
     if (!userFindAllOrders) {
       throw new GenericError('404', 'Not Found');
