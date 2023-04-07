@@ -15,7 +15,10 @@ function SellerOrders() {
         sellerOrders.map((
           { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber },
         ) => (
-          <Link to={ `/seller/orders/${id}` } key={ id }>
+          <Link
+            to={ `/seller/orders/${id}` }
+            key={ id }
+          >
             <div>
               <span
                 data-testid={ `seller_orders__element-order-id-${id}` }

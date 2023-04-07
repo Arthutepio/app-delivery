@@ -1,4 +1,4 @@
-const { User, Sale, SaleProduct } = require('../../database/models');
+const { User, Sale, SaleProduct, Product } = require('../../database/models');
 
 const GenericError = require('../utils/GenericError');
 
@@ -50,13 +50,28 @@ const createSale = async (body) => {
 const getSaleById = async (sellerId) => {
   const dataSales = await Sale.findAll({
     where: { sellerId },
+    include: [{ model: Product, as: 'products', through: { attibutes: [] } }],
   });
 
   return dataSales;
+};
+
+const updateStatus = async (saleId, status) => {
+  try {
+    await Sale.update(
+      { status },
+      { where: { id: saleId } },
+    );
+    
+    return status;
+  } catch (err) {
+    return err;
+  }
 };
 
 module.exports = {
   findAllSeller,
   createSale,
   getSaleById,
+  updateStatus,
 };

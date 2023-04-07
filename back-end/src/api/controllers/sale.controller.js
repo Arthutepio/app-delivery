@@ -31,8 +31,37 @@ const getSaleById = async (req, res, next) => {
   }
 };
 
+const setStatus = (data) => {
+  switch (data) {
+    case 'Pendente':
+      return { message: 'Pendente' };
+    case 'Preparando':
+      return { message: 'Preparando' };
+    case 'Em Trânsito':
+      return { message: 'Em Trânsito' };
+    case 'Entregue':
+      return { message: 'Entregue' };
+    default:
+      return { message: 'Fatal Error!!!!!!' };
+  }
+};
+
+const updateStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const data = await saleService.updateStatus(id, status);
+
+    const { message } = setStatus(data);
+    return res.status(200).json({ message });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   findAllSeller,
   createSale,
   getSaleById,
+  updateStatus,
 };
