@@ -13,6 +13,7 @@ function Provider({ children }) {
   const [orders, setOrders] = useState([]);
   const [userId, setUserId] = useState();
   const [token, setTokenGlobal] = useState('');
+  const [sellerOrders, setSellerOrders] = useState([]);
 
   useEffect(() => {
     const apiProducts = async () => {
@@ -43,6 +44,8 @@ function Provider({ children }) {
     setUserId,
     token,
     setTokenGlobal,
+    sellerOrders,
+    setSellerOrders,
   }), [
     products,
     totalCart,
@@ -53,6 +56,7 @@ function Provider({ children }) {
     orders,
     userId,
     token,
+    sellerOrders,
   ]);
   return (
     <Context.Provider value={ context }>

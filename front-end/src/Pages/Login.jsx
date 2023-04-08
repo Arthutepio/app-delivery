@@ -4,7 +4,8 @@ import { requestData, requestLogin, setToken } from '../services/requests';
 import Context from '../Context/Context';
 
 function Login() {
-  const { setUserEmail, setUserId, setTokenGlobal, setUsername } = useContext(Context);
+  const { setUserEmail, setUserId, setTokenGlobal,
+    setUsername, setSellerOrders } = useContext(Context);
   const [formInput, setFormInput] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(true);
   const [failLogin, setFailLogin] = useState(false);
@@ -44,8 +45,9 @@ function Login() {
       setTokenGlobal(token);
       setUsername(name);
 
-      const sellerOrders = await requestData(`sale/${id}`);
-      localStorage.setItem('sellerOrders', JSON.stringify(sellerOrders));
+      const response = await requestData(`sale/${id}`);
+      setSellerOrders(response);
+      localStorage.setItem('sellerOrders', JSON.stringify(response));
 
       switch (result.role) {
       case 'administrator':

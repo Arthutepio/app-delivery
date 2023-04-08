@@ -10,31 +10,30 @@ function SellerOrderDetails({ match: { params: { id: saleId } } }) {
   const [disableBTN, setDisableBTN] = useState(false);
   const [disableBTN2, setDisableBTN2] = useState(true);
 
-  const newRequest = async () => {
+  const updateDetails = async () => {
     const userId = JSON.parse(localStorage.getItem('user')).id;
-    const updatedOrders = await requestData(`sale/${userId}`);
-    const especificOrder = updatedOrders.find(({ id }) => id === Number(saleId));
-    localStorage.setItem('sellerOrderDetails', JSON.stringify(especificOrder));
+    const response = await requestData(`sale/${userId}`);
+    localStorage.setItem('sellerOrders', JSON.stringify(response));
+    const especificOrder = response.find((order) => order.id === Number(saleId));
+    localStorage.setItem('orderStatus', JSON.stringify(especificOrder.status));
+    if (especificOrder.status === 'Preparando') {
+      setDisableBTN(true);
+      setDisableBTN2(false);
+    }
+    if (especificOrder.status === 'Em Trânsito') {
+      setDisableBTN(true);
+      setDisableBTN2(true);
+    }
   };
 
-  useEffect(() => { newRequest(); }, []);
+  useEffect(() => {
+    updateDetails();
+  }, []);
 
-  const sellerOrdersDetails = JSON.parse(localStorage.getItem('sellerOrderDetails'));
-
-  // const orderDetails = JSON.parse(localStorage.getItem('sellerOrderDetails'));
-  // const { id, saleDate, status, totalPrice, products } = orderDetails;
-
-  // const url = window.location.pathname;
-  // function apenasNumeros(string) {
-  //   const numString = string.replace(/[^0-9]/g, '');
-  //   const number = parseInt(numString, 10);
-  //   return number;
-  // }
-
-  // const newNumber = apenasNumeros(url);
-
-  // const currentOrder = sellerOrdersDetails.find((order) => order.id === Number(saleId));
-  const { id, saleDate, status, totalPrice, products } = sellerOrdersDetails;
+  const allSellerOrders = JSON.parse(localStorage.getItem('sellerOrders'));
+  const details = allSellerOrders.find((order) => order.id === Number(saleId));
+  // setSellerOrders(details);
+  const { id, saleDate, status, totalPrice, products } = details;
 
   const updateStatus = async (newStatus) => {
     const { data } = await updateData(`/sale/${id}`, { status: newStatus });
