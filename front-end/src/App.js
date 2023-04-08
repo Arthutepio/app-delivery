@@ -9,6 +9,7 @@ import CustomerOrder from './Pages/CustomerOrder';
 import ManagerUser from './Pages/ManagerUser';
 import OrderDetails from './Pages/OrderDetails';
 import SellerOrders from './Pages/SellerOrders';
+import SellerOrderDetails from './Pages/SellerOrderDetails';
 
 function App() {
   const { token } = JSON.parse(localStorage.getItem('user')) || '';
@@ -32,6 +33,7 @@ function App() {
       <Route exact path="/admin/manage" component={ ManagerUser } />
       <Route exact path="/customer/orders/:id" component={ OrderDetails } />
       <Route exact path="/seller/orders" component={ SellerOrders } />
+      <Route exact path="/seller/orders/:id" component={ SellerOrderDetails } />
     </Switch>
   );
 }
