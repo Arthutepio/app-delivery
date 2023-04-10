@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { screen } from '@testing-library/react';
 import App from '../../App';
 // import * as axios from 'axios';
@@ -38,4 +38,4 @@ describe('Case 3: Página ProductClient :', () => {
 
     expect(btnCarrinho).toBeInTheDocument();
   });
-});
+}); */

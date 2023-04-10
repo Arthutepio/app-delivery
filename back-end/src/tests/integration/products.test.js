@@ -19,15 +19,12 @@ describe('testes para rota de /products', function () {
 
     const response = await chai.request(app).get('/products');
 
-    console.log('response ===', response.body);
-
     expect(response.status).to.equal(200);
-    // expect(response.body).to.be.an('array');
-    // expect(response.body[0]).to.have.property('id');
-    // expect(response.body[0]).to.have.property('name');
-    // expect(response.body[0]).to.have.property('price');
-    // expect(response.body[0]).to.have.property('url_image');
-    // expect(response.body).to.have.property('token').to.be.a('string');
+    expect(response.body).to.be.an('array');
+    expect(response.body[0]).to.have.property('id');
+    expect(response.body[0]).to.have.property('name');
+    expect(response.body[0]).to.have.property('price');
+    expect(response.body[0]).to.have.property('urlImage');
   });
 
   it('Caso 2-FAILURE: GET /products deve retornar status 200 e produtos', async function () {
@@ -35,14 +32,6 @@ describe('testes para rota de /products', function () {
 
     const response = await chai.request(app).get('/products');
 
-    console.log('response ===', response.body);
-
     expect(response.status).to.equal(404);
-    // expect(response.body).to.be.an('array');
-    // expect(response.body[0]).to.have.property('id');
-    // expect(response.body[0]).to.have.property('name');
-    // expect(response.body[0]).to.have.property('price');
-    // expect(response.body[0]).to.have.property('url_image');
-    // expect(response.body).to.have.property('token').to.be.a('string');
   });
 });

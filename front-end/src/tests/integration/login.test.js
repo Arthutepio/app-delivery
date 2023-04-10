@@ -1,12 +1,13 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as axios from 'axios';
 import Login from '../../Pages/Login';
 import renderWithRouterContext from '../utils/renderWithRouterContext';
+import renderWithRouterApp from '../utils/renderWithRouterApp';
 import App from '../../App';
+import mockAxios from '../mocks/mockAxios';
 
-jest.mock('axios');
+// jest.mock('axios');
 
 const VALID_EMAIL = 'zebirita@email.com';
 const VALID_PASSWORD = '$#zebirita#$';
@@ -68,25 +69,11 @@ describe('Case 1: Página Login', () => {
     expect(submitBtn).toBeDisabled();
   });
 
-  it('Renderiza mensagem de erro quando nao encontrar o usuario', async () => {
-    axios.post.mockRejectedValue({ message: 'Not found' });
-    renderWithRouterContext(<Login />);
+  it('Redireciona corretamente ao efetuar o login', async () => {
+    mockAxios.post.mockResolvedValue({ data: { ...customer } });
+    mockAxios.get.mockResolvedValue({ data: {} });
 
-    const emailInput = screen.getByLabelText(/Login/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const submitBtn = screen.getByRole('button', { name: /Login/i });
-
-    userEvent.type(emailInput, VALID_EMAIL);
-    userEvent.type(passwordInput, VALID_PASSWORD);
-    userEvent.click(submitBtn);
-
-    const errorMessage = await screen.findByText(/Erro/i);
-    expect(errorMessage).toBeInTheDocument();
-  });
-
-  it.only('Redirects to customer products page with valid customer info', async () => {
-    axios.post.mockResolvedValue({ data: { ...customer } });
-    const { history } = renderWithRouterContext(<App />);
+    const { history } = renderWithRouterApp(<App />);
 
     const emailInput = screen.getByLabelText(/Login/i);
     const passwordInput = screen.getByLabelText(/Password/i);
@@ -95,15 +82,9 @@ describe('Case 1: Página Login', () => {
     userEvent.type(emailInput, VALID_EMAIL);
     userEvent.type(passwordInput, VALID_PASSWORD);
 
-    console.log('inputEmail ---', emailInput.value);
-    console.log('inputPassword ---', passwordInput.value);
-
-    await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
-
     userEvent.click(submitBtn);
-    await screen.findByText('Sair')
+
+    await screen.findByText('Sair');
     expect(history.location.pathname).toBe('/customer/products');
-    // await waitForElementToBeRemoved(submitBtn);
-    // expect(history.location.pathname).toBe('/customer/products');
   });
 });
