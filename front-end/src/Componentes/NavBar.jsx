@@ -35,7 +35,7 @@ function NavBar({ item1, item2, item3, item4 }) {
         )
       }
 
-      {
+      {/* {
         item2 && (
           <button
             type="button"
@@ -45,7 +45,7 @@ function NavBar({ item1, item2, item3, item4 }) {
             {item2}
           </button>
         )
-      }
+      } */}
 
       <p data-testid="customer_products__element-navbar-user-full-name">
         {item3}

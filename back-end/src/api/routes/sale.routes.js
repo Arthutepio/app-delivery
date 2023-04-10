@@ -10,4 +10,6 @@ saleRoutes.post('/createsale', saleController.createSale);
 
 saleRoutes.get('/sale/:id', saleController.getSaleById);
 
+saleRoutes.put('/sale/:id', saleController.updateStatus);
+
 module.exports = saleRoutes;
