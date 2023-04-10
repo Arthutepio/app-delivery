@@ -5,8 +5,8 @@ function NavBar({ item1, item2, item3, item4 }) {
   const history = useHistory();
 
   const clearLocalStora = () => {
-    const local = localStorage.removeItem('user');
-    if (!local) history.push('/');
+    localStorage.removeItem('user');
+    history.push('/');
   };
 
   return (

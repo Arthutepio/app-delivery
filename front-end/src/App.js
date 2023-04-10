@@ -12,19 +12,20 @@ import SellerOrders from './Pages/SellerOrders';
 import SellerOrderDetails from './Pages/SellerOrderDetails';
 
 function App() {
-  const { token } = JSON.parse(localStorage.getItem('user')) || '';
+  // const { token } = JSON.parse(localStorage.getItem('user')) || '';
+  // const token = localStorage.getItem('token') || '';
   return (
     <Switch>
       <Route exact path="/">
-        <Redirect to={ token ? '/customer/products' : '/login' } />
+        <Redirect to="/login" />
       </Route>
-      {
+      {/* {
         token && (
-          <Route exact path="/login">
+          <Route exact path="/">
             <Redirect to="/customer/products" />
           </Route>
         )
-      }
+      } */}
       <Route exact path="/login" component={ Login } />
       <Route path="/customer/products" component={ ProductClient } />
       <Route exact path="/register" component={ Register } />

@@ -24,6 +24,10 @@ function SellerOrderDetails({ match: { params: { id: saleId } } }) {
       setDisableBTN(true);
       setDisableBTN2(true);
     }
+    if (especificOrder.status === 'Entregue') {
+      setDisableBTN(true);
+      setDisableBTN2(true);
+    }
   };
 
   useEffect(() => {
@@ -31,6 +35,7 @@ function SellerOrderDetails({ match: { params: { id: saleId } } }) {
   }, []);
 
   const allSellerOrders = JSON.parse(localStorage.getItem('sellerOrders'));
+  console.log(allSellerOrders);
   const details = allSellerOrders.find((order) => order.id === Number(saleId));
   // setSellerOrders(details);
   const { id, saleDate, status, totalPrice, products } = details;

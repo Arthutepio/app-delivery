@@ -3,26 +3,35 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
-import { requestData } from '../services/requests';
+import { requestData, updateData } from '../services/requests';
 
 function OrderDetails({ match: { params: { id: saleId } } }) {
   const { username } = useContext(Context);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [orderStatus, setOrderStatus] = useState('');
 
   const newRequest = async () => {
-    const { sellerId } = JSON.parse(localStorage.getItem('orderDetails'));
+    const { sellerId } = JSON.parse(localStorage.getItem('customerOrders'))[0];
     const updatedOrders = await requestData(`sale/${sellerId}`);
+    localStorage.setItem('orderDetails', JSON.stringify(updatedOrders));
+    localStorage.setItem('customerOrders', JSON.stringify(updatedOrders));
     const especificOrder = updatedOrders.find(({ id }) => id === Number(saleId));
-    localStorage.setItem('orderDetails', JSON.stringify(especificOrder));
+    if (especificOrder.status === 'Em Trânsito') {
+      setIsButtonDisabled(false);
+    }
   };
 
   useEffect(() => newRequest(), []);
 
-  const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
-  const { id, saleDate, status, totalPrice, products } = orderDetails;
+  const allOrders = JSON.parse(localStorage.getItem('orderDetails'));
+  const details = allOrders.find((order) => order.id === Number(saleId));
+  const { id, saleDate, status, totalPrice, products } = details;
 
-  const setDisabled = () => status === 'Entregue' && setIsButtonDisabled(true);
-  setDisabled();
+  const handleStatus = async () => {
+    const { data } = await updateData(`/sale/${id}`, { status: 'Entregue' });
+    setOrderStatus(data.message);
+    setIsButtonDisabled(true);
+  };
 
   return (
     <div>
@@ -52,13 +61,14 @@ function OrderDetails({ match: { params: { id: saleId } } }) {
             `customer_order_details__element-order-details-label-delivery-status${id}`
           }
         >
-          { status }
+          { orderStatus || status }
         </span>
 
         <button
           type="button"
           data-testid="customer_order_details__button-delivery-check"
           disabled={ isButtonDisabled }
+          onClick={ handleStatus }
         >
           Marcar como entregue
         </button>
