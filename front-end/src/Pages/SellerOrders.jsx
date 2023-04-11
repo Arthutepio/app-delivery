@@ -10,7 +10,7 @@ function SellerOrders() {
 
   return (
     <div>
-      <NavBar item1="PEDIDOS" item3={ username } item4="Sair" />
+      <NavBar item2="PEDIDOS" item3={ username } item4="Sair" />
       {
         sellerOrders.map((
           { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber },
