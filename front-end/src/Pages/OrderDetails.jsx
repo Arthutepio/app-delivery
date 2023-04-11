@@ -11,8 +11,7 @@ function OrderDetails({ match: { params: { id: saleId } } }) {
   const [orderStatus, setOrderStatus] = useState('');
 
   const newRequest = async () => {
-    const { sellerId } = JSON.parse(localStorage.getItem('customerOrders'))[0];
-    const updatedOrders = await requestData(`sale/${sellerId}`);
+    const updatedOrders = await requestData(`sale/${2}`);
     localStorage.setItem('orderDetails', JSON.stringify(updatedOrders));
     localStorage.setItem('customerOrders', JSON.stringify(updatedOrders));
     const especificOrder = updatedOrders.find(({ id }) => id === Number(saleId));
@@ -58,7 +57,7 @@ function OrderDetails({ match: { params: { id: saleId } } }) {
 
         <span
           data-testid={
-            `customer_order_details__element-order-details-label-delivery-status${id}`
+            `customer_order_details__element-order-details-label-delivery-status-${id}`
           }
         >
           { orderStatus || status }

@@ -7,14 +7,6 @@ import CardOrders from '../Componentes/CardOrders';
 function CustomerOrder() {
   const { username } = useContext(Context);
 
-  // const newRequest = async () => {
-  //   const user = JSON.parse(localStorage.getItem('user'));
-  //   const sellerOrders = await requestData(`orders/${user.id}`);
-  //   setUpdatedOrders(sellerOrders);
-  //   return sellerOrders;
-  // };
-  // newRequest();
-
   const orders = JSON.parse(localStorage.getItem('customerOrders'));
 
   return (
