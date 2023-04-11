@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-2);
+}
+
+.login-container {
+  width: 900px;
+  height: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
+  background-color: var(--color-6);
+}
+
+.img-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  margin: 0;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.img-container img {
+  width: 300px;
+  margin: auto;
+}
+
+.form-container {
+  width: 500px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 15px;
+}
+
+.input-form {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: var(--color-3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  width: 400px;
+  height: 50px;
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-form {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--color-3);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 190px;
+  height: 50px;
+}
+
+.btn-form:hover {
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+  background-color: rgb(242, 28, 28);
+}
+
+.btn-form:disabled {
+  opacity: 60%;
+}
+
+.input-form:hover {
+  background-color: var(--color-2)
+}
+
+::placeholder {
+  color: var(--color-3);
+}
+
+.error-form {
+  position: absolute;
+  top: 290px;
+  color: var(--color-3);
+  font-weight: 600;
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-icon {
+  font-size: 25px;
+}

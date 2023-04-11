@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { BiError } from 'react-icons/bi';
 import { requestData, requestLogin, setToken } from '../services/requests';
 import Context from '../Context/Context';
+import '../Css/Login.css';
+import Logo from '../Assets/Logo.png';
 
 function Login() {
   const { setUserEmail, setUserId, setTokenGlobal,
@@ -94,63 +97,77 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-container">
+      <div className="img-container">
+        <img src={ Logo } alt="Logo Birita Delivery" />
+      </div>
 
-      <form action="">
-        <label htmlFor="email-input">
-          <span>Login</span>
-          <input
-            type="email"
-            id="email-input"
-            data-testid="common_login__input-email"
-            name="email"
-            required
-            onChange={ inputHandler }
-          />
-        </label>
+      <div className="form-container">
+        <form action="" className="login-form">
+          <label htmlFor="email-input">
+            <input
+              type="email"
+              id="email-input"
+              data-testid="common_login__input-email"
+              name="email"
+              required
+              onChange={ inputHandler }
+              placeholder="Digite seu email"
+              className="input-form"
+            />
+          </label>
 
-        <label htmlFor="password-input">
-          <span>Password</span>
-          <input
-            type="password"
-            id="password-input"
-            data-testid="common_login__input-password"
-            name="password"
-            required
-            onChange={ inputHandler }
-          />
-        </label>
+          <label htmlFor="password-input">
+            <input
+              type="password"
+              id="password-input"
+              data-testid="common_login__input-password"
+              name="password"
+              required
+              onChange={ inputHandler }
+              placeholder="Digite sua senha"
+              className="input-form"
+            />
+          </label>
 
-        <button
-          type="submit"
-          data-testid="common_login__button-login"
-          disabled={ isDisabled }
-          onClick={ (event) => login(event) }
-        >
-          Login
-        </button>
+          <div className="btn-container">
+            <button
+              type="submit"
+              data-testid="common_login__button-login"
+              disabled={ isDisabled }
+              onClick={ (event) => login(event) }
+              className="btn-form"
+            >
+              Login
+            </button>
 
-        <button
-          type="button"
-          data-testid="common_login__button-register"
-          onClick={ () => history.push('/register') }
-        >
-          Ainda não tenho conta
-        </button>
-      </form>
+            <button
+              type="button"
+              data-testid="common_login__button-register"
+              onClick={ () => history.push('/register') }
+              className="btn-form"
+            >
+              Ainda não tenho conta
+            </button>
+          </div>
+        </form>
 
-      {
-        failLogin
+        {
+          failLogin
         && (
-          <span
-            data-testid="common_login__element-invalid-email"
-          >
-            Erro
-          </span>
+          <div className="error-form">
+            <BiError className="error-icon" />
+            <span
+              data-testid="common_login__element-invalid-email"
+            >
+              Dados inválidos, tente novamente!
+            </span>
+          </div>
+
         )
 
-      }
+        }
+      </div>
 
     </div>
   );
