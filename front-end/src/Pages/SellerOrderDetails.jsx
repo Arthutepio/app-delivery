@@ -24,6 +24,10 @@ function SellerOrderDetails({ match: { params: { id: saleId } } }) {
       setDisableBTN(true);
       setDisableBTN2(true);
     }
+    if (especificOrder.status === 'Entregue') {
+      setDisableBTN(true);
+      setDisableBTN2(true);
+    }
   };
 
   useEffect(() => {
@@ -53,7 +57,7 @@ function SellerOrderDetails({ match: { params: { id: saleId } } }) {
 
   return (
     <div>
-      <NavBar item1="PEDIDOS" item2="" item3={ username } item4="Sair" />
+      <NavBar item2="PEDIDOS" item3={ username } item4="Sair" />
 
       <div>
         <span

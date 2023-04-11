@@ -11,6 +11,26 @@ function Login() {
   const [failLogin, setFailLogin] = useState(false);
   const history = useHistory();
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user !== null) {
+      switch (user.role) {
+      case 'customer':
+        history.push('/customer/products');
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      case 'administrator':
+        history.push('/admin/manage');
+        break;
+      default:
+        break;
+      }
+    }
+  }, []);
+
   const inputHandler = ({ target: { name, value } }) => {
     setFormInput({ ...formInput, [name]: value });
   };
@@ -36,6 +56,7 @@ function Login() {
       const result = await requestLogin('/login', { email, password });
 
       const { token, name, role, id } = result;
+      localStorage.setItem('token', token);
       setToken(token);
       const storageObj = { name, email, role, token, id };
       localStorage.setItem('user', JSON.stringify(storageObj));
@@ -48,6 +69,10 @@ function Login() {
       const response = await requestData(`sale/${id}`);
       setSellerOrders(response);
       localStorage.setItem('sellerOrders', JSON.stringify(response));
+
+      const allOrders = await requestData(`orders/${id}`);
+      localStorage.setItem('customerOrders', JSON.stringify(allOrders));
+      localStorage.setItem('orderDetails', JSON.stringify(allOrders));
 
       switch (result.role) {
       case 'administrator':

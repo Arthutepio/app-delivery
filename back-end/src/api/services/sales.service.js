@@ -52,7 +52,6 @@ const getSaleById = async (sellerId) => {
     where: { sellerId },
     include: [{ model: Product, as: 'products', through: { attibutes: [] } }],
   });
-
   return dataSales;
 };
 

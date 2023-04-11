@@ -13,6 +13,7 @@ function CardOrders({ id, status, price, date }) {
         </span>
         <span
           data-testid={ `customer_orders__element-delivery-status-${id}` }
+          id="test"
         >
           { status }
         </span>

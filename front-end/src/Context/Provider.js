@@ -13,6 +13,9 @@ function Provider({ children }) {
   const [orders, setOrders] = useState([]);
   const [userId, setUserId] = useState();
   const [token, setTokenGlobal] = useState('');
+  const [updatedOrders, setUpdatedOrders] = useState(
+    JSON.parse(localStorage.getItem('orders')),
+  );
   const [sellerOrders, setSellerOrders] = useState([]);
 
   useEffect(() => {
@@ -44,6 +47,8 @@ function Provider({ children }) {
     setUserId,
     token,
     setTokenGlobal,
+    updatedOrders,
+    setUpdatedOrders,
     sellerOrders,
     setSellerOrders,
   }), [
@@ -56,6 +61,7 @@ function Provider({ children }) {
     orders,
     userId,
     token,
+    updatedOrders,
     sellerOrders,
   ]);
   return (

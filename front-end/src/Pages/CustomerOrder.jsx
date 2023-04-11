@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
 import CardOrders from '../Componentes/CardOrders';
+// import { requestData } from '../services/requests';
 
 function CustomerOrder() {
   const { username } = useContext(Context);
-  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+  const orders = JSON.parse(localStorage.getItem('customerOrders'));
 
   return (
     <div>
