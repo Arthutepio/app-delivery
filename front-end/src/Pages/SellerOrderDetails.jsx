@@ -35,7 +35,6 @@ function SellerOrderDetails({ match: { params: { id: saleId } } }) {
   }, []);
 
   const allSellerOrders = JSON.parse(localStorage.getItem('sellerOrders'));
-  console.log(allSellerOrders);
   const details = allSellerOrders.find((order) => order.id === Number(saleId));
   // setSellerOrders(details);
   const { id, saleDate, status, totalPrice, products } = details;

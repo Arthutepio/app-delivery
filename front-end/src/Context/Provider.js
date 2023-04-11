@@ -16,6 +16,7 @@ function Provider({ children }) {
   const [updatedOrders, setUpdatedOrders] = useState(
     JSON.parse(localStorage.getItem('orders')),
   );
+  const [sellerOrders, setSellerOrders] = useState([]);
 
   useEffect(() => {
     const apiProducts = async () => {
@@ -48,6 +49,8 @@ function Provider({ children }) {
     setTokenGlobal,
     updatedOrders,
     setUpdatedOrders,
+    sellerOrders,
+    setSellerOrders,
   }), [
     products,
     totalCart,
@@ -59,6 +62,7 @@ function Provider({ children }) {
     userId,
     token,
     updatedOrders,
+    sellerOrders,
   ]);
   return (
     <Context.Provider value={ context }>

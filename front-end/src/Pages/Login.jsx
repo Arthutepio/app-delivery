@@ -4,7 +4,8 @@ import { requestData, requestLogin, setToken } from '../services/requests';
 import Context from '../Context/Context';
 
 function Login() {
-  const { setUserEmail, setUserId, setTokenGlobal, setUsername } = useContext(Context);
+  const { setUserEmail, setUserId, setTokenGlobal,
+    setUsername, setSellerOrders } = useContext(Context);
   const [formInput, setFormInput] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(true);
   const [failLogin, setFailLogin] = useState(false);
@@ -65,8 +66,9 @@ function Login() {
       setTokenGlobal(token);
       setUsername(name);
 
-      const sellerOrders = await requestData(`sale/${id}`);
-      localStorage.setItem('sellerOrders', JSON.stringify(sellerOrders));
+      const response = await requestData(`sale/${id}`);
+      setSellerOrders(response);
+      localStorage.setItem('sellerOrders', JSON.stringify(response));
 
       const allOrders = await requestData(`orders/${id}`);
       localStorage.setItem('customerOrders', JSON.stringify(allOrders));
@@ -86,6 +88,7 @@ function Login() {
         history.push('/');
       }
     } catch (error) {
+      console.log(error);
       setFailLogin(true);
     }
   };
