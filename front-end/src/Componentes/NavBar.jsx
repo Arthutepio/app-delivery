@@ -3,8 +3,8 @@ import { BiShoppingBag } from 'react-icons/bi';
 import { AiOutlineShop } from 'react-icons/ai';
 import { IoMdExit } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
-import '../Css/Navbar.css';
 import Logo from '../Assets/logo-white.png';
+import '../Css/Navbar.css';
 
 function NavBar({ item1, item2, item3 }) {
   const history = useHistory();

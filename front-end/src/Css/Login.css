@@ -103,7 +103,7 @@ body {
   background-color: var(--color-2)
 }
 
-::placeholder {
+.login-form ::placeholder {
   color: var(--color-3);
 }
 
