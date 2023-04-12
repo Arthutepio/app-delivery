@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { BiError } from 'react-icons/bi';
 import { requestRegister } from '../services/requests';
+import Logo from '../Assets/Logo.png';
+import '../Css/Register.css';
 
 function Register() {
   const [formInput, setFormInput] = useState({ email: '', password: '', name: '' });
@@ -39,58 +42,63 @@ function Register() {
   };
 
   return (
-    <div>
-      <form>
-        <label htmlFor="nome">
-          Nome
+    <div className="register-container">
+      <div className="img-container">
+        <img src={ Logo } alt="Logo Birita Delivery" />
+      </div>
+      <div className="form-container">
+        <form className="register-form">
           <input
             type="text"
             id="nome"
             name="name"
             data-testid="common_register__input-name"
+            className="input-register-form"
+            placeholder="Nome completo"
             onChange={ inputHandler }
           />
-        </label>
-        <label htmlFor="email">
-          Email
           <input
             type="email"
             id="email"
             name="email"
             data-testid="common_register__input-email"
+            className="input-register-form"
+            placeholder="Email"
             onChange={ inputHandler }
           />
-        </label>
-        <label htmlFor="password">
-          Senha
           <input
             type="password"
             id="password"
             name="password"
             data-testid="common_register__input-password"
+            className="input-register-form"
+            placeholder="Senha"
             onChange={ inputHandler }
           />
-        </label>
-        <button
-          type="button"
-          data-testid="common_register__button-register"
-          disabled={ isDisabled }
-          onClick={ (event) => resgister(event) }
-        >
-          Cadastrar
-        </button>
-      </form>
-
-      {
-        failRegister
-        && (
-          <span
-            data-testid="common_register__element-invalid_register"
+          <button
+            type="button"
+            data-testid="common_register__button-register"
+            className="btn-register-form"
+            disabled={ isDisabled }
+            onClick={ (event) => resgister(event) }
           >
-            Erro
-          </span>
+            Cadastrar
+          </button>
+        </form>
+        {
+          failRegister
+        && (
+          <div className="error-form">
+            <BiError className="error-icon" />
+            <span
+              data-testid="common_register__element-invalid_register"
+            >
+              Dados inválidos, tente novamente!
+            </span>
+          </div>
         )
-      }
+        }
+      </div>
     </div>
   );
 }
