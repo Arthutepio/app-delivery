@@ -66,6 +66,11 @@ body {
   width: 400px;
 }
 
+.btn-register-form:hover {
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+  transform: scale(1.02);
+}
+
 .btn-register-form:disabled {
   opacity: 60%;
 }
