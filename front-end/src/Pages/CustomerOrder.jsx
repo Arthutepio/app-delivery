@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
 import CardOrders from '../Componentes/CardOrders';
+import '../Css/CustomerOrder.css';
 
 function CustomerOrder() {
   const { username } = useContext(Context);
@@ -11,7 +12,7 @@ function CustomerOrder() {
   return (
     <div>
       <NavBar item1="PRODUTOS" item2="MEUS PEDIDOS" item3={ username } item4="Sair" />
-      <main>
+      <main className="customer-order-container">
         {
           orders.map(({ id, status, saleDate, totalPrice }) => (
             <CardOrders

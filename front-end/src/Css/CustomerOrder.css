@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-2);
+}
+
+.customer-order-container {
+  align-items: center;
+  display: grid;
+  flex-flow: column wrap;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 100px 10%;
+  width: 80%;
+}
+
+.card-order {
+  align-items: center;
+  background-color: #ffcb6a;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 125px;
+  padding: 0 1%;
+  width: 500px;
+}
+
+.card-order, a:link {
+  text-decoration: none;
+}
+
+.card-order, a:visited {
+  text-decoration: none;
+}
+
+.card-order, a:hover {
+  text-decoration: none;
+}
+
+.card-order, a:active {
+  text-decoration: none;
+}
+
+.order-number-container {
+  align-items: center;
+  background-color: aliceblue;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(1, 2fr);
+  height: 89%;
+  text-align: center;
+  width: 95%;
+}
+
+.order-number {
+  color: black;
+  font-size: 30px;
+  font-weight: 700;
+  height: 100%;
+  padding-bottom: 20%;
+}
+
+.order-number-text {
+  color: black;
+  font-size: 14px;
+  height: 100%;
+  padding-top: 15%;
+}
+
+.order-data {
+  align-items: center;
+  color: black;
+  display: grid;
+  grid-template-columns: repeat(1, 2fr);
+  height: 90%;
+  text-align: center;
+}
+
+.order-status {
+  background-color: #c88304;
+  border-radius: 5px;
+  color: black;
+  font-size: 25px;
+  font-weight: 700;
+  padding: 23% 0;
+  text-align: center;
+  width: 95%;
+}
+
+.order-price, .order-date {
+  background-color: white;
+  border-radius: 5px;
+  font-weight: 700;
+  padding: 8% 0;
+}
