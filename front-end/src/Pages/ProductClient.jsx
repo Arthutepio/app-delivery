@@ -1,9 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { BsCartFill } from 'react-icons/bs';
 import CardProduct from '../Componentes/CardProduct';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
 import { setToken } from '../services/requests';
+import '../Css/CustomerProducts.css';
 
 function ProductClient() {
   const {
@@ -30,41 +32,42 @@ function ProductClient() {
   });
 
   return (
-    <>
+    <div className="product-client-container">
       <NavBar item1="PRODUTOS" item2="MEUS PEDIDOS" item3={ username } item4="Sair" />
-      {
-        products.map((product) => (
-          <CardProduct
-            key={ product.id }
-            name={ product.name }
-            price={ (product.price).toString().replace('.', ',') }
-            image={ product.urlImage }
-            id={ product.id }
-          />))
-      }
+
+      <div className="cards-container">
+        {
+          products.map((product) => (
+            <CardProduct
+              key={ product.id }
+              name={ product.name }
+              price={ (product.price).toString().replace('.', ',') }
+              image={ product.urlImage }
+              id={ product.id }
+            />))
+        }
+      </div>
+
       <button
         type="button"
         data-testid="customer_products__button-cart"
         disabled={ isDisabledBtnCart }
         onClick={ () => history.push('/customer/checkout') }
+        className="btn-cart"
       >
-        Ver Carrinho:
-        {
-          totalCart
-            && (
-              <span
-                data-testid="customer_products__checkout-bottom-value"
-              >
-                {
-                  (Math.round(totalCart * 100) / 100)
-                    .toFixed(2)
-                    .replace('.', ',')
-                }
-              </span>
-            )
-        }
+        <BsCartFill className="icon-cart" />
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {
+            `R$: ${(Math.round(totalCart * 100) / 100)
+              .toFixed(2)
+              .replace('.', ',')}`
+          }
+        </span>
+
       </button>
-    </>
+    </div>
 
   );
 }

@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { BsCartPlusFill, BsCartDashFill } from 'react-icons/bs';
 import Context from '../Context/Context';
 
 const PropTypes = require('prop-types');
@@ -70,45 +71,60 @@ function CardProduct({ name, price, image, id }) {
   };
 
   return (
-    <div>
-      <span data-testid={ `customer_products__element-card-title-${id}` }>
-        { name }
-      </span>
-
-      <span data-testid={ `customer_products__element-card-price-${id}` }>
-        { price }
-      </span>
+    <div className="card-product">
 
       <img
         src={ image }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
-        width="50px"
+        className="img-card"
       />
 
-      <button
-        type="button"
-        data-testid={ `customer_products__button-card-rm-item-${id}` }
-        onClick={ handleDecreaseButton }
-      >
-        -
-      </button>
+      <div className="name-price-container">
+        <span
+          data-testid={ `customer_products__element-card-title-${id}` }
+          className="name-card"
+        >
+          { name }
+        </span>
 
-      <input
-        data-testid={ `customer_products__input-card-quantity-${id}` }
-        type="number"
-        min="0"
-        value={ quantity }
-        onChange={ handleInputChange }
-      />
+        <span
+          data-testid={ `customer_products__element-card-price-${id}` }
+          className="price-card"
+        >
+          { `R$ ${price}` }
+        </span>
+      </div>
 
-      <button
-        type="button"
-        data-testid={ `customer_products__button-card-add-item-${id}` }
-        onClick={ handleIncreaseButton }
-      >
-        +
-      </button>
+      <div className="quantity-container">
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
+          onClick={ handleDecreaseButton }
+          className="btn-card-minus"
+        >
+          <BsCartDashFill />
+        </button>
+
+        <input
+          data-testid={ `customer_products__input-card-quantity-${id}` }
+          type="number"
+          min="0"
+          value={ quantity }
+          onChange={ handleInputChange }
+          className="input-card"
+        />
+
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-add-item-${id}` }
+          onClick={ handleIncreaseButton }
+          className="btn-card-plus"
+        >
+          <BsCartPlusFill />
+        </button>
+      </div>
+
     </div>
   );
 }
