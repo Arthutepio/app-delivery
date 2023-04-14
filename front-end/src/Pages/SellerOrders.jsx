@@ -24,7 +24,7 @@ function SellerOrders() {
               to={ `/seller/orders/${id}` }
               key={ id }
             >
-              <div className="card-order">
+              <div className="card-order seller">
                 <div className="seller-order-number-container">
                   <span className="order-number-text">
                     Pedido
@@ -38,7 +38,7 @@ function SellerOrders() {
                   </span>
                 </div>
 
-                <div>
+                <div className="right-card">
                   <div className="seller-order-data-container">
 
                     <div className={ `seller-status-container ${status}` }>

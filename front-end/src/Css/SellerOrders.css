@@ -84,3 +84,14 @@ padding: 0 0 0 5px;
 .Trânsito {
   background-color: rgba(0, 0, 0, 0.7);
 }
+
+.seller {
+  height: 150px;
+}
+
+.right-card {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
