@@ -1,0 +1,83 @@
+.adm-container {
+  margin: 100px 10%;
+  width: 80%;
+}
+
+.new-user-form-container {
+  background-color: white;
+  width: 100%;
+  margin: 20px 0 0 0;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+.new-user-form {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  font-weight: 500;
+}
+
+.input-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.new-user-form div label input, .new-user-form div label select {
+  width: 250px;
+  padding: 10px;
+  margin: 0 0 0 20px;
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  transition: 0.2s linear;
+}
+
+.new-user-form div label input:hover, .new-user-form div label select:hover {
+  background-color: var(--color-2);
+}
+
+.new-user-form button {
+  width: 200px;
+  padding: 10px;
+  background-color: var(--color-3);
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.2s linear;
+}
+
+.new-user-form button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+}
+
+.new-user-form button:disabled {
+  opacity: 60%;
+}
+
+.error-new-user {
+  align-items: center;
+  color: var(--color-3);
+  display: flex;
+  font-weight: 600;
+  gap: 7px;
+  justify-content: center;
+  margin: 20px 0 0 0;
+}
