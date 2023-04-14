@@ -149,6 +149,15 @@
   transform: scale(1.1);
 }
 
+.btn-cart:disabled {
+  opacity: 60%;
+  cursor: auto;
+}
+
+.btn-cart:hover:disabled{
+  transform: scale(1);
+}
+
 .icon-cart {
   font-size: 24px;
 }

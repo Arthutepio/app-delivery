@@ -51,6 +51,9 @@ function CardProduct({ name, price, image, id }) {
   };
 
   const handleDecreaseButton = () => {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart.length === 1 || 0) setIsDisabledBtnCart(true);
+
     if (quantity > 0) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);

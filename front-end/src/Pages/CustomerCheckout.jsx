@@ -56,6 +56,7 @@ function CustomerCheckout() {
     localStorage.setItem('orderDetails', JSON.stringify(result));
 
     history.push(`/customer/orders/${idSale}`);
+    localStorage.setItem('cart', JSON.stringify([]));
   };
 
   const onClickRemoveButton = (id) => {

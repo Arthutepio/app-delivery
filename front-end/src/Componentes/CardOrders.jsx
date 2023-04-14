@@ -15,11 +15,12 @@ function CardOrders({ id, status, price, date }) {
             data-testid={ `customer_orders__element-order-id-${id}` }
             className="order-number"
           >
-            { `000${id}` }
+            { (id)
+              .toLocaleString('en-US', { minimumIntegerDigits: 4, useGrouping: false }) }
           </span>
         </div>
 
-        <div className="status-container">
+        <div className={ `status-container ${status}` }>
           <span
             data-testid={ `customer_orders__element-delivery-status-${id}` }
             className="order-status"
