@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-max-depth */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { GiCheckMark } from 'react-icons/gi';
 import NavBar from '../Componentes/NavBar';
 import Context from '../Context/Context';
+import '../Css/OrderDetails.css';
 import { requestData, updateData } from '../services/requests';
 
 function OrderDetails({ match: { params: { id: saleId } } }) {
@@ -33,112 +36,128 @@ function OrderDetails({ match: { params: { id: saleId } } }) {
   };
 
   return (
-    <div>
+    <div className="order-details-container">
       <NavBar item1="PRODUTOS" item2="MEUS PEDIDOS" item3={ username } item4="Sair" />
 
-      <div>
-        <span
-          data-testid="customer_order_details__element-order-details-label-order-id"
-        >
-          { `Pedido ${id}`}
-        </span>
-
-        <span
-          data-testid="customer_order_details__element-order-details-label-seller-name"
-        >
-          P. Vendedora: Fulana Pereira
-        </span>
-
-        <span
-          data-testid="customer_order_details__element-order-details-label-order-date"
-        >
-          { new Date(saleDate).toLocaleDateString('pt-BR', { timezone: 'UTC' }) }
-        </span>
-
-        <span
-          data-testid={
-            `customer_order_details__element-order-details-label-delivery-status-${id}`
-          }
-        >
-          { orderStatus || status }
-        </span>
-
-        <button
-          type="button"
-          data-testid="customer_order_details__button-delivery-check"
-          disabled={ isButtonDisabled }
-          onClick={ handleStatus }
-        >
-          Marcar como entregue
-        </button>
+      <div className="details-title-container">
+        <h3>Detalhes do pedido</h3>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <td>Item</td>
-            <td>Descrição</td>
-            <td>Quantidade</td>
-            <td>Valor Unitário</td>
-            <td>Sub-total</td>
-          </tr>
-        </thead>
+      <div className="order-details">
+        <div className="order-infos">
+          <span
+            data-testid="customer_order_details__element-order-details-label-order-id"
+          >
+            { `Pedido ${id}`}
+          </span>
 
-        <tbody>
+          <span
+            data-testid="customer_order_details__element-order-details-label-seller-name"
+          >
+            Vendedor(a): Fulana Pereira
+          </span>
 
-          {
-            products.map(({ name, SaleProduct: { quantity }, price }, index) => (
-              <tr key={ index }>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-item-number-${index}`
-                  }
-                >
-                  { index + 1 }
-                </td>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-name-${index}`
-                  }
-                >
-                  { name }
-                </td>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-quantity-${index}`
-                  }
-                >
-                  { quantity }
-                </td>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-unit-price-${index}`
-                  }
-                >
-                  { `R$ ${Number(price).toFixed(2).replace('.', ',')}` }
-                </td>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-sub-total-${index}`
-                  }
-                >
-                  {
-                    `R$ ${(Number(price) * Number(quantity))
-                      .toFixed(2).replace('.', ',')}`
-                  }
-                </td>
-              </tr>
-            ))
-          }
+          <span
+            data-testid="customer_order_details__element-order-details-label-order-date"
+          >
+            { new Date(saleDate).toLocaleDateString('pt-BR', { timezone: 'UTC' }) }
+          </span>
 
-        </tbody>
-      </table>
+          <span
+            data-testid={
+              `customer_order_details__element-order-details-label-delivery-status-${id}`
+            }
+          >
+            { orderStatus || status }
+          </span>
 
-      <span
-        data-testid="customer_order_details__element-order-total-price"
-      >
-        { `R$ ${Number(totalPrice).toFixed(2).replace('.', ',')}` }
-      </span>
+          <button
+            type="button"
+            data-testid="customer_order_details__button-delivery-check"
+            disabled={ isButtonDisabled }
+            onClick={ handleStatus }
+            className="btn-deliver"
+          >
+            Marcar como entregue
+            <GiCheckMark className="icon-check" />
+          </button>
+        </div>
+
+        <table className="table">
+          <thead>
+            <tr>
+              <td className="border-left">Item</td>
+              <td>Descrição</td>
+              <td>Quantidade</td>
+              <td>Valor Unitário</td>
+              <td className="border-right">Sub-total</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            {
+              products.map(({ name, SaleProduct: { quantity }, price }, index) => {
+                let darkerBg = '';
+                if (index % 2 !== 0) darkerBg = 'dark';
+
+                return (
+                  <tr key={ index } className={ `product-table ${darkerBg}` }>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-item-number-${index}`
+                      }
+                      className="border-left"
+                    >
+                      { index + 1 }
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-name-${index}`
+                      }
+                    >
+                      { name }
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-quantity-${index}`
+                      }
+                    >
+                      { quantity }
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-unit-price-${index}`
+                      }
+                    >
+                      { `R$ ${Number(price).toFixed(2).replace('.', ',')}` }
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-sub-total-${index}`
+                      }
+                      className="border-right"
+                    >
+                      {
+                        `R$ ${(Number(price) * Number(quantity))
+                          .toFixed(2).replace('.', ',')}`
+                      }
+                    </td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+
+        <div className="total-price-container">
+          <span
+            data-testid="customer_order_details__element-order-total-price"
+            className="total-price"
+          >
+            { `Total: R$ ${Number(totalPrice).toFixed(2).replace('.', ',')}` }
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
