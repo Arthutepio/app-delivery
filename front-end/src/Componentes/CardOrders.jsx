@@ -6,6 +6,7 @@ function CardOrders({ id, status, price, date }) {
   return (
     <Link to={ `/customer/orders/${id}` }>
       <div className="card-order">
+
         <div className="order-number-container">
           <span className="order-number-text">
             Pedido
@@ -17,12 +18,16 @@ function CardOrders({ id, status, price, date }) {
             { `000${id}` }
           </span>
         </div>
-        <span
-          data-testid={ `customer_orders__element-delivery-status-${id}` }
-          className="order-status"
-        >
-          { status }
-        </span>
+
+        <div className="status-container">
+          <span
+            data-testid={ `customer_orders__element-delivery-status-${id}` }
+            className="order-status"
+          >
+            { status }
+          </span>
+        </div>
+
         <div className="order-data">
           <span
             data-testid={ `customer_orders__element-order-date-${id}` }
@@ -34,7 +39,7 @@ function CardOrders({ id, status, price, date }) {
             data-testid={ `customer_orders__element-card-price-${id}` }
             className="order-price"
           >
-            { price.replace('.', ',') }
+            { `Total: R$ ${price.replace('.', ',')}` }
           </span>
         </div>
       </div>
