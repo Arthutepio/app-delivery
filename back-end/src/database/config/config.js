@@ -11,7 +11,7 @@ const suffix = {
 };
 
 const options = {
-  host: process.env.MYSQLHOST || process.env.MYSQL_HOST || 'localhost',
+  host: process.env.MYSQLHOST || 'localhost',
   port: process.env.MYSQLPORT || '3306',
   database:
     `${process.env.MYSQLDATABASE || 'delivery-app'}${suffix[environment] || suffix.test}`,
