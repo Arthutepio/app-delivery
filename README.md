@@ -8,7 +8,7 @@ Ao fazer um pedido, o cliente espera que ele seja exibido no painel de pedidos d
 
 Os principais fluxos podem ser divididos em quatro grupos: fluxo comum (login e registro), fluxo do cliente (produtos, checkout, pedidos e detalhes do pedido), fluxo da pessoa vendedora (pedidos e controle do pedido) e validação do status do pedido (teste sem atualização em tempo real e teste com atualização em tempo real). Além disso,  o fluxo da pessoa administradora, que envolve o gerenciamento de usuários.
 
-<img width="100%" src="./public/" />
+<img width="100%" src="back-end/public/images/app-delivery001.png" />
 
 ## Idealizadores
 <a href="https://github.com/Arthutepio/app-delivery/graphs/contributors">
