@@ -25,8 +25,6 @@ Os principais fluxos podem ser divididos em quatro grupos: fluxo comum (login e 
 - Rastreamento do status dos pedidos pelos clientes.
 - Gerenciamento de usuários pelos administradores.
 - Atualizações em tempo real sobre o status dos pedidos.
-- Programação Orientada a Objetos e princípios SOLID:
-- Implementar: `Classes`, `Instâncias`, `Atributos` e `Métodos`.
 
 ##  Tecnologias utilizadas
   
@@ -40,7 +38,6 @@ Os principais fluxos podem ser divididos em quatro grupos: fluxo comum (login e 
 - React
 - Styled-components
 - React-router-dom
-- React-hot-toast
 - React-icons
 - Stylelint
 - Eslint
@@ -59,7 +56,6 @@ Os principais fluxos podem ser divididos em quatro grupos: fluxo comum (login e 
 - Express.js
 - MySql
 - Sequelize
-- Programação Orientada a Objetos (POO)
 - Arquitetura Model-Service-Controller (MSC)
 - JWT
 - md5
